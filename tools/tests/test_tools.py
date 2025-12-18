@@ -1,9 +1,14 @@
 import sys
 from pathlib import Path
 import numpy as np
+import pandas as pd
+
+# Ensure repo root is on path
 ROOT = Path(__file__).resolve().parents[2]  # .../final-group26
 sys.path.insert(0, str(ROOT))
-from tools.tools import time_of_day
+
+from tools.tools import time_of_day, extract_streets
+
 
 def test_time_of_day_basic():
     assert time_of_day(0) == "Night (00–05)"
@@ -18,3 +23,42 @@ def test_time_of_day_basic():
 
 def test_time_of_day_nan():
     assert time_of_day(np.nan) == "Unknown"
+
+
+def test_extract_streets_basic_intersection():
+    loc = "Intersection of Market St and 5th St"
+    streets = extract_streets(loc)
+
+    assert "MARKET ST" in streets
+    assert "5TH ST" in streets
+    assert len(streets) == 2
+
+
+def test_extract_streets_ampersand():
+    loc = "MISSION ST & 16TH ST"
+    streets = extract_streets(loc)
+
+    assert streets == ["MISSION ST", "16TH ST"]
+
+
+def test_extract_streets_slash():
+    loc = "VAN NESS AVE / BROADWAY"
+    streets = extract_streets(loc)
+
+    assert "VAN NESS AVE" in streets
+    assert "BROADWAY" in streets
+
+
+def test_extract_streets_between_clause_removed():
+    loc = "MARKET ST BETWEEN 4TH ST AND 5TH ST"
+    streets = extract_streets(loc)
+
+    assert streets == ["MARKET ST"]
+
+
+def test_extract_streets_nan():
+    assert extract_streets(np.nan) == []
+
+
+def test_extract_streets_empty_string():
+    assert extract_streets("") == []
