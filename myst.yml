@@ -1,6 +1,8 @@
 # See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
+  resources:
+    - results/*.html
   id: 2e58002b-3ba2-4c28-a725-e2b6e3e79ee8
   # title:
   # description:
