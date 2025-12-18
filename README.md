@@ -4,6 +4,8 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-f25/final-group26/HEAD)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17971094.svg)](https://doi.org/10.5281/zenodo.17971094)
+
 This project analyzes pedestrian-related traffic fatalities in San Francisco using the fatality crash records dataset. The motivation is to identify who is most affected, when and where fatalities concentrate, which can support targeted interventions and policy making.
 
 In the project, we did the following:
